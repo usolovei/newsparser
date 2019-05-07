@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Log extends Model
 {
-    function __construct($parsedArticle){
+    public function saveLog($parsedArticle){
         $this->websiteURL = $parsedArticle['websiteURL'];
         $this->parsedURL = $parsedArticle['link'];
         $this->save();

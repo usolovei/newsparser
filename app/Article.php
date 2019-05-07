@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    function __construct($parsedArticle){
+    public function saveArticle($parsedArticle){
         $this->websiteURL = $parsedArticle['websiteURL'];
         $this->title = $parsedArticle['title'];
         $this->slug = $parsedArticle['slug'];
@@ -16,8 +16,7 @@ class Article extends Model
         $this->content = $parsedArticle['text'];
 
         $this->save();
-
     }
 
-    protected $fillable = ['link', 'title', 'slug', 'date', 'imageURL', 'tag', 'content'];
+    protected $fillable = ['websiteURL', 'title', 'slug', 'date', 'imageURL', 'tag', 'content'];
 }

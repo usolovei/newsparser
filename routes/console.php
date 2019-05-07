@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
-
+use App\Http\Controllers\ParseController;
 /*
 |--------------------------------------------------------------------------
 | Console Routes
@@ -19,4 +19,7 @@ Artisan::command('inspire', function () {
 
 Artisan::command('parse', function(){
     $this->comment('Parsing news...');
+    $parse_tool = new ParseController();
+    $parse_tool->parse();
+    $this->comment('Success!');
 })->describe('Initially parse news from specified websites.');

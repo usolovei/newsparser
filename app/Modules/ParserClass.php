@@ -82,7 +82,7 @@ class ParserClass
         return $content;
     }
 
-    public function parserData()
+    public function parserData($parsedLinks)
     {
         $articlesArray = [];
 
@@ -99,8 +99,10 @@ class ParserClass
             });
 
             foreach($articleLinksArray as $link)
-                $articlesArray[] = $this->getContent($link, $websiteURL, $websiteParseSettings);
-        };
+                if(!($parsedLinks->contains('parsedURL', $link))) {
+                    $articlesArray[] = $this->getContent($link, $websiteURL, $websiteParseSettings);
+                }
+                };
 
 
         return $articlesArray;

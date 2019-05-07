@@ -17,20 +17,16 @@ class ParseController extends Controller
     public function parse(){
         $parserClass = new ParserClass();
 
-        $parserData = $parserClass->parserData();
+        $alreadyParsed = Log::select('parsedURL')->get();
+        $parserData = $parserClass->parserData($alreadyParsed);
+
 
         foreach($parserData as $parsedArticle){
-            new Article($parsedArticle);
-            new Log($parsedArticle);
-//            $article->websiteURL = $parsedArticle['websiteURL'];
-//            $article->title = $parsedArticle['title'];
-//            $article->slug = $parsedArticle['slug'];
-//            $article->date = $parsedArticle['date'];
-//            $article->imageURL = 'some/url';
-//            $article->tag = $parsedArticle['tag'];
-//            $article->content = $parsedArticle['text'];
-//
-//            $article->save();
+
+            $article = new Article();
+            $article->saveArticle($parsedArticle);
+            $log = new Log();
+            $log->saveLog($parsedArticle);
         }
     }
 

@@ -13,4 +13,4 @@
 
 Route::get('/', 'ArticleController@print');
 
-Route::get('/parser', 'ParseController@parse');
+
