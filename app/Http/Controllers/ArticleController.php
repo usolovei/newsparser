@@ -16,7 +16,7 @@ class ArticleController extends Controller
 
     public function print($site=''){
 
-        if(!strcmp($site,'')) {
+        if(!(strcmp($site,''))) {
             $parserData = Article::select('id','websiteName', 'title','slug', 'date' ,'imageURL', 'tag' )->get();
         }
         else{
@@ -26,8 +26,7 @@ class ArticleController extends Controller
         $websitePageURLs = [];
 
         foreach ($websites as $website){
-            $tmp = explode('.', $website);
-            $tuple[0] = '/'.$tmp[0].$tmp[1].'/news';
+            $tuple[0] = '/'.$website.'/news';
             $tuple[1] = $website;
             $websitePageURLs[] = $tuple;
         }
