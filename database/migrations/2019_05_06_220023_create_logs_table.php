@@ -15,6 +15,7 @@ class CreateLogsTable extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('websiteName');
             $table->text('websiteURL');
             $table->text('parsedURL');
             $table->timestamps();

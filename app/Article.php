@@ -14,6 +14,7 @@ class Article extends Model
         $this->imageURL = 'some/url';
         $this->tag = $parsedArticle['tag'];
         $this->content = $parsedArticle['text'];
+        $this->websiteName = $parsedArticle['websiteName'];
 
         $this->save();
     }

@@ -45,6 +45,7 @@ class ParserClass
         $tmp = trim($link, "/");
         $tmp = explode("/", $tmp);
         $slug = $tmp [(count($tmp)-1)];
+        $websiteName = $tmp [2];
 
         $date = $crawlerArticle->filter($settings['dateSelector'])->text();
 
@@ -77,6 +78,7 @@ class ParserClass
             //'image' => $image,
             'slug' => $slug,
             'websiteURL' => $websiteURL,
+            'websiteName' => $websiteName,
         ];
 
         return $content;

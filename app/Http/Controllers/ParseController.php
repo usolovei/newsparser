@@ -9,10 +9,6 @@ use App\Log;
 
 class ParseController extends Controller
 {
-    public function start(){
-
-        return view('articles.articles', compact('parserData'));
-    }
 
     public function parse(){
         $parserClass = new ParserClass();

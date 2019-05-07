@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', 'ArticleController@print');
+Route::get('/', 'ArticleController@home');
 
+Route::get('/articles', 'ArticleController@print' );
+
+Route::get('/{site}/news', 'ArticleController@print');
 
