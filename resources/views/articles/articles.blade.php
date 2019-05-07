@@ -17,4 +17,6 @@
         <span> | </span>
         <span>{{$data->websiteName}}</span>
     @endforeach
+
+    {{$parserData->links()}}
 @endsection

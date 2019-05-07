@@ -17,10 +17,10 @@ class ArticleController extends Controller
     public function print($site=''){
 
         if(!(strcmp($site,''))) {
-            $parserData = Article::select('id','websiteName', 'title','slug', 'date' ,'imageURL', 'tag' )->get();
+            $parserData = Article::select('id','websiteName', 'title','slug', 'date' ,'imageURL', 'tag' )->paginate(5);
         }
         else{
-            $parserData = Article::select('id','websiteName', 'title','slug', 'date' ,'imageURL', 'tag')->where('websiteName', $site)->get();
+            $parserData = Article::select('id','websiteName', 'title','slug', 'date' ,'imageURL', 'tag')->where('websiteName', $site)->paginate(5);
         }
         $websites = Log::distinct('websiteName')->pluck('websiteName');
         $websitePageURLs = [];
