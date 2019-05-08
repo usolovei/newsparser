@@ -2,20 +2,25 @@
 
 @section('filter')
     @foreach ($websitePageURLs as $website)
-        <a href="{{$website[0]}}">{{$website[1]}}</a>
-        <span> | </span>
+        <li class="nav-item-active">
+            <a class="nav-link" href="{{$website[0]}}">{{$website[1]}}</a>
+        </li>
     @endforeach
 @endsection
 
 
 @section('content')
     @foreach ($parserData as $data)
-        <a href="#"><h5>{{$data->title}}</h5></a>
-        <span>{{$data->tag}}</span>
-        <span> | </span>
-        <span>{{$data->date}}</span>
-        <span> | </span>
-        <span>{{$data->websiteName}}</span>
+        <div class="blog-post">
+            <h2 class="blog-post-title"><a href="/articles/{{$data->slug}}">{{$data->title}}</a></h2>
+            <p class="blog-post-meta">
+                {{$data->tag}}
+                 |
+                {{$data->date}}
+                 |
+                {{$data->websiteName}}
+            </p>
+        </div>
     @endforeach
 
     {{$parserData->links()}}

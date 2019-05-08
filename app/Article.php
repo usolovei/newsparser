@@ -7,17 +7,31 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     public function saveArticle($parsedArticle){
-        $this->websiteURL = $parsedArticle['websiteURL'];
-        $this->title = $parsedArticle['title'];
-        $this->slug = $parsedArticle['slug'];
-        $this->date = $parsedArticle['date'];
-        $this->imageURL = 'some/url';
-        $this->tag = $parsedArticle['tag'];
-        $this->content = $parsedArticle['text'];
-        $this->websiteName = $parsedArticle['websiteName'];
 
-        $this->save();
+        $imgsURLs = $parsedArticle['image'];
+        $imgs = explode('|', $imgsURLs);
+
+        if($imgs) {
+            $image = $imgs[0];
+        }
+        else{
+            $image = "";
+        }
+
+        $this::firstOrCreate(
+        ['slug' => $parsedArticle['slug']],
+        [
+            'websiteName' => $parsedArticle['websiteName'],
+            'websiteURL' => $parsedArticle['websiteURL'],
+            'title' => $parsedArticle['title'],
+            'date' => $parsedArticle['date'],
+            'imageURL' => $image,
+            'tag' => $parsedArticle['tag'],
+            'content' => $parsedArticle['text']
+        ]
+        );
+
     }
 
-    protected $fillable = ['websiteURL', 'title', 'slug', 'date', 'imageURL', 'tag', 'content'];
+    protected $fillable = ['websiteName','websiteURL', 'title', 'slug', 'date', 'imageURL', 'tag', 'content'];
 }

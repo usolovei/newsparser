@@ -13,7 +13,10 @@
 
 Route::get('/', 'ArticleController@home');
 
-Route::get('/articles', 'ArticleController@print' );
+Route::get('/articles', 'ArticleController@printArticles' );
 
-Route::get('/{site}/news', 'ArticleController@print');
+Route::get('/{site}/news', 'ArticleController@printArticles');
 
+Route::get('/articles/{slug}', 'ArticleController@showArticle');
+
+Route::get('/recent', 'ArticleController@showRecentArticles');

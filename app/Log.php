@@ -7,11 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Log extends Model
 {
     public function saveLog($parsedArticle){
-        $this->websiteURL = $parsedArticle['websiteURL'];
-        $this->parsedURL = $parsedArticle['link'];
-        $this->websiteName = $parsedArticle['websiteName'];
-        $this->save();
+        $this::firstOrCreate(
+            ['parsedURL' => $parsedArticle['link']],
+            [
+                'websiteName' => $parsedArticle['websiteName'],
+                'websiteURL' => $parsedArticle['websiteURL'],
+            ]
+        );
+
     }
 
-    protected $fillable = ['link', 'websiteURL'];
+    protected $fillable = ['link', 'websiteURL', 'websiteName', 'parsedURL'];
 }

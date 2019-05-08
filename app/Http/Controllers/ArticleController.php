@@ -12,15 +12,18 @@ class ArticleController extends Controller
 
         return view('welcome');
     }
-
-
-    public function print($site=''){
+    /*
+     *
+     *
+     *
+     * */
+    public function printArticles($site=''){
 
         if(!(strcmp($site,''))) {
-            $parserData = Article::select('id','websiteName', 'title','slug', 'date' ,'imageURL', 'tag' )->paginate(5);
+            $parserData = Article::select('id','websiteName', 'title','slug', 'date' ,'imageURL', 'tag' )->paginate(4);
         }
         else{
-            $parserData = Article::select('id','websiteName', 'title','slug', 'date' ,'imageURL', 'tag')->where('websiteName', $site)->paginate(5);
+            $parserData = Article::select('id','websiteName', 'title','slug', 'date' ,'imageURL', 'tag')->where('websiteName', $site)->orderBy('created_at', 'desc')->paginate(4);
         }
         $websites = Log::distinct('websiteName')->pluck('websiteName');
         $websitePageURLs = [];
@@ -32,6 +35,28 @@ class ArticleController extends Controller
         }
 
         return view('articles.articles', compact('parserData','websitePageURLs'));
+    }
+    /*
+     *
+     *
+     *
+     *
+     * */
+    public function showArticle($slug){
+        $article = Article::where('slug', $slug)->first();
+        $content = explode('|', $article['content']);
+
+        return view('articles.showArticle', compact('article', 'content'));
+    }
+    /*
+     *
+     *
+     *
+     *
+     * */
+    public function showRecentArticles(){
+        $parserData = Article::select('id','websiteName', 'title','slug', 'date' ,'imageURL', 'tag' )->orderBy('created_at', 'desc')->paginate(4);
+        return view('articles.recent', compact('parserData'));
     }
 
 }
